@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  python_apptest:
+    container_name: python_apptest
+    image: pythoncontruccion:1.0
+    build:
+      context: .
+    ports:
+      - "9669:5000"
+    restart: always
+    networks:
+      - python_apptest_network
+  nginx_ssl_python_apptest:
+    container_name: nginx_ssl_python_apptest
+    image: nginx
+    build:
+      context: .
+      target: nginx_conf
+    tty: true
+    ports:
+      - "9670:443"
+    volumes:
+      #- nginxfiles:/ssl/
+      #- /home/app/nginx/html:/var/www/html
+      #- /home/app/nginx/logs:/etc/nginx/logs
+      - nginxfiles:/home/app/nginx
+    #command: tail -f /dev/null
+    command: > 
+      bash -c "
+        mkdir -p /var/www/html /etc/nginx/logs /ssl &&
+        cp -r /home/app/nginx/html/. /var/www/html/ &&
+        cp -r /home/app/nginx/logs/. /etc/nginx/logs/ &&
+        cp -r /home/app/nginx/ssl/. /ssl/ && 
+        nginx -g 'daemon off;'
+      "
+    restart: always
+    depends_on:
+      - python_apptest
+    networks:
+      - python_apptest_network
+
+volumes:
+  nginxfiles:
+    external: true
+
+  
+networks:
+  python_apptest_network:
+    driver: bridge
