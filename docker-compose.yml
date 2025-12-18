@@ -6,6 +6,7 @@ services:
     image: pythoncontruccion:1.0
     build:
       context: .
+      target: python_apptest
     ports:
       - "9669:5000"
     restart: always
@@ -16,6 +17,7 @@ services:
     image: nginx
     build:
       context: .
+      target: nginx_conf
     tty: true
     ports:
       - "9670:443"
