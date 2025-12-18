@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PROGRAM = credentials('programidname')
+    }
     stages{
         stage('Build Maven'){
             steps{
