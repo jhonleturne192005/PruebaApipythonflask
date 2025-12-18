@@ -16,7 +16,6 @@ services:
     image: nginx
     build:
       context: .
-      target: nginx_conf
     tty: true
     ports:
       - "9670:443"
