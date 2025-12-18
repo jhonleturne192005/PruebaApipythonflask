@@ -12,6 +12,8 @@ services:
     restart: always
     environment:
       - PROGRAM=${PROGRAM}
+    env_file:
+      - .env
     networks:
       - python_apptest_network
   nginx_ssl_python_apptest:
