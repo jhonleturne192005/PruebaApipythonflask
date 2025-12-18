@@ -29,9 +29,9 @@ def get_environment():
     return jsonify(response),200
 
 @app.route('/api/entornofile', methods=['GET'])
-def get_environment():
-    NAME_API=os.getenv('NOMBRE_BD', 'default_value')
-    response = {'environment': NAME_API}
+def get_environmentdos():
+    NAME_BD=os.getenv('NOMBRE_BD', 'default_value')
+    response = {'environment': NAME_BD}
     return jsonify(response),200
 
 
