@@ -10,7 +10,7 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jhonleturne192005/PruebaApipythonflask']])
             }
         }
-        stage('configuration env file'){ {
+        stage('configuration env file'){
             steps {
                 withCredentials([file(credentialsId: 'envfile', variable: 'ENV_FILE')]) {
                     sh 'cp "$ENV_FILE" .env'
