@@ -7,7 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 CMD ["python", "api.py"]
 
-FROM nginx:latest AS nginx_conf
-RUN apt-get update && apt-get install -y bash
+FROM nginx:1.29.4 AS nginx_conf
 WORKDIR /home/app
 COPY ./nginx.conf /etc/nginx/nginx.conf
