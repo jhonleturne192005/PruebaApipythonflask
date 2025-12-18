@@ -10,6 +10,8 @@ services:
     ports:
       - "9669:5000"
     restart: always
+    environment:
+      - PROGRAM=${PROGRAM}
     networks:
       - python_apptest_network
   nginx_ssl_python_apptest:

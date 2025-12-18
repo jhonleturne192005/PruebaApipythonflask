@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        PROGRAM = credentials('programidname')
+        // no vale directo para usarla en el proyecto python debido a que la aplicacion python corre bajo contenedor docker y queda fuera del scope de Jenkins, por eso se debe agg en docker-compose.yml mediante sus environment variables
+        PROGRAM = credentials('programidname') 
     }
     stages{
         stage('Build Maven'){
@@ -13,7 +14,7 @@ pipeline {
             steps{
                 script{
                     sh 'docker compose build'
-                    sh 'docker compose up'
+                    sh 'docker compose up -d'
                 }
             }
         }
